@@ -9,14 +9,21 @@
 (column-number-mode)
 
 ;; Dark theme.
-(load-theme 'wombat)
-(set-face-background 'default "#111")
-(set-face-background 'cursor "#c96")
-(set-face-background 'isearch "#c60")
-(set-face-foreground 'isearch "#eee")
-(set-face-background 'lazy-highlight "#960")
-(set-face-foreground 'lazy-highlight "#ccc")
-(set-face-foreground 'font-lock-comment-face "#fc0")
+(use-package modus-themes
+  :ensure                         ; omit this to use the built-in themes
+  :init
+  ;; Add all your customizations prior to loading the themes
+  (setq modus-themes-italic-constructs t
+        modus-themes-bold-constructs nil
+        modus-themes-region '(bg-only no-extend))
+
+  ;; Load the theme files before enabling a theme (else you get an error).
+  (modus-themes-load-themes)
+  :config
+  ;; Load the theme of your choice:
+  ;;(modus-themes-load-operandi) ;; OR 
+  (modus-themes-load-vivendi)
+  :bind ("<f5>" . modus-themes-toggle))
 
 ;; Interactively do things.
 (ido-mode 1)
